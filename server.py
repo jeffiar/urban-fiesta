@@ -3,12 +3,14 @@ import csv
 import json
 
 from surgery import Surgery, SurgeryException
+from cors import crossdomain
 
 app = Flask(__name__)
 def create_app():
     return app
 
 @app.route('/')
+@crossdomain(origin="*")
 def index():
     """Show all the surgeries, most recent first
     Returns: a json thing"""
@@ -43,6 +45,7 @@ def create():
     return 'You created a new surgery with id %d' % new_id
 
 @app.route('/surgeries/<int:id>')
+@crossdomain(origin="*")
 def get_surgery(id):
     """Show the info of the surgery's details
     Returns: the text of the surgery

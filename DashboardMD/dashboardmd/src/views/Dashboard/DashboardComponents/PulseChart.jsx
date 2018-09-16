@@ -49,10 +49,10 @@ class PulseChart extends React.Component {
 
   resetData(time) {
     const raw_labels = dailySalesChart.data.labels;
-    const displayed_labels = get_window(raw_labels, time, 5, 5);
+    const displayed_labels = get_window(raw_labels, time, 600, 5);
 
     const raw_series = dailySalesChart.data.series;
-    const displayed_series = get_window(raw_series, time, 5, 5);
+    const displayed_series = get_window(raw_series, time, 600, 5);
     let temp_series = []
     for (var val = 0; val < displayed_series.length; val++){
       if (time == val) {
@@ -84,7 +84,7 @@ class PulseChart extends React.Component {
           <GridItem xs={12} sm={12} md={4}>
             <Card chart>
               <CardBody>
-                <h3 className={classes.cardTitle}>Pulse</h3>
+                <h3 className={classes.cardTitle}>In O2</h3>
               </CardBody>
               <CardHeader color="info">
                 <ChartistGraph

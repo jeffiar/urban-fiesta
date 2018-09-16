@@ -59,7 +59,7 @@ class VitalGraphs extends React.Component {
 
   tick() {
     this.setState(prevState => ({
-      time: prevState.time + 1 
+      time: prevState.time + 1
     }));
   }
 

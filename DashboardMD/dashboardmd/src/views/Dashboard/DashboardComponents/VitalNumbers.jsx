@@ -42,7 +42,8 @@ import dashboardStyle from "../../../assets/jss/material-dashboard-react/views/d
 
 class VitalNumbers extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    time: 0
   };
 
   handleChange = (event, value) => {
@@ -53,8 +54,48 @@ class VitalNumbers extends React.Component {
     this.setState({ value: index });
   };
 
+  tick() {
+    this.setState(prevState => ({
+      time: prevState.time + 1
+    }));
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  resetData(time) {
+    let heartRate = dailySalesChart.data.series[time];
+    let systolic = Math.floor(Math.random()*(130-110)+110);
+    let diastolic = Math.floor(Math.random()*(92-75)+75);
+    let spo2 = Math.floor(Math.random()*(99-83)+83);
+    let respiration = Math.floor(Math.random()*(28-12)+12);
+
+    if (heartRate === undefined) {
+      heartRate = "N/A"
+      systolic = "N/A"
+      diastolic = "N/A"
+      spo2 = "N/A"
+      respiration = "N/A"
+    }
+
+    return ({
+      heartRate: heartRate,
+      systolic: systolic,
+      diastolic: diastolic,
+      spo2: spo2,
+      respiration: respiration
+    });
+  }
+
   render() {
     const { classes } = this.props;
+    const new_data = this.resetData(this.state.time);
     return (
       <div>
         <GridContainer>
@@ -64,7 +105,7 @@ class VitalNumbers extends React.Component {
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <h1>63</h1>
+                    <h1>{new_data.heartRate}</h1>
                   </CardIcon>
                   <p className={classes.cardCategory}></p>
                   <h3 className={classes.cardTitle}>Heart Rate</h3>
@@ -78,7 +119,7 @@ class VitalNumbers extends React.Component {
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <h1>118</h1>
+                    <h1>{new_data.systolic}</h1>
                   </CardIcon>
                   <p className={classes.cardCategory}></p>
                   <h3 className={classes.cardTitle}>Systolic</h3>
@@ -92,7 +133,7 @@ class VitalNumbers extends React.Component {
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <h1>85</h1>
+                    <h1>{new_data.diastolic}</h1>
                   </CardIcon>
                   <p className={classes.cardCategory}></p>
                   <h3 className={classes.cardTitle}>Diastolic</h3>
@@ -106,7 +147,7 @@ class VitalNumbers extends React.Component {
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <h1>98</h1>
+                    <h1>{new_data.spo2}</h1>
                   </CardIcon>
                   <p className={classes.cardCategory}></p>
                   <h3 className={classes.cardTitle}>SpO2</h3>
@@ -120,7 +161,7 @@ class VitalNumbers extends React.Component {
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <h1>20</h1>
+                    <h1>{new_data.respiration}</h1>
                   </CardIcon>
                   <p className={classes.cardCategory}></p>
                   <h3 className={classes.cardTitle}>Respiration</h3>
