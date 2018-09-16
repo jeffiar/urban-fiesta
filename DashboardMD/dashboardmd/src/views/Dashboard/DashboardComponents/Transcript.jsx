@@ -40,9 +40,13 @@ import {
 
 import dashboardStyle from "../../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
+import get_text_window from "./TextWindow";
+
 class Transcript extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    time: 0,
+    text: 'We will now use the scalpel to gain access to the lower vena cava.'
   };
 
   handleChange = (event, value) => {
@@ -53,8 +57,30 @@ class Transcript extends React.Component {
     this.setState({ value: index });
   };
 
+  tick() {
+    this.setState(prevState => ({
+      time: prevState.time + 1
+    }));
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  resetData(time) {
+    const raw_text = this.state.text;
+    console.log('reset');
+    const displayed_text = get_text_window(raw_text, time, 5, 5);
+    return displayed_text.join(' ');
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, time } = this.props;
+    const displayed_text = this.resetData(time);
     return (
       <div>
         <GridContainer>
@@ -64,7 +90,9 @@ class Transcript extends React.Component {
               <Card chart style={{height: '600px'}}>
                 <CardBody>
                   <h3 className={classes.cardTitle}>Lecture Transcription</h3>
-                  <h4>We will now use the scalpel to gain access to the lower vena cava.</h4>
+                    <h4>
+                      {displayed_text}
+                    </h4>
                 </CardBody>
               </Card>
             </GridItem>

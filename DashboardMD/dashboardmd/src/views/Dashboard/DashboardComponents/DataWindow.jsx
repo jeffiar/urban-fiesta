@@ -1,5 +1,5 @@
 const get_window = (data, cur_time, max_time, window_length) => {
-  console.log(data)
+  // console.log(data)
   var l = data.length;
   var splits = Math.floor(data.length * cur_time / max_time);
   var left = splits - 4;
@@ -10,4 +10,4 @@ const get_window = (data, cur_time, max_time, window_length) => {
   return data.slice(left, right);
 }
 
-export default get_window
+export default get_window;

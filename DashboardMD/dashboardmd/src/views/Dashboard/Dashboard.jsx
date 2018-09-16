@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
         <div style={{display: "flex", flexDirection: 'row'}}>
           <VitalNumbers />
           <VitalGraphs />
-          <Transcript />
+          <Transcript time={0}/>
         </div>
       </div>
     );

@@ -59,12 +59,12 @@ class VitalGraphs extends React.Component {
 
   tick() {
     this.setState(prevState => ({
-      time: (prevState.time + 1) % 10
+      time: prevState.time + 1 
     }));
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 3000);
+    this.interval = setInterval(() => this.tick(), 1000);
   }
 
   componentWillUnmount() {

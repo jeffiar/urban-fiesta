@@ -53,10 +53,25 @@ class PulseChart extends React.Component {
 
     const raw_series = dailySalesChart.data.series;
     const displayed_series = get_window(raw_series, time, 5, 5);
+    let temp_series = []
+    for (var val = 0; val < displayed_series.length; val++){
+      if (time == val) {
+        temp_series.push({
+          "value": displayed_series[val],
+          "className": "special"
+        });
+      }
+      else {
+        temp_series.push({
+          "value": displayed_series[val],
+          "className": "boring"
+        });
+      }
+    }
 
     const displayed_data = {
       labels: displayed_labels,
-      series: [displayed_series],
+      series: [temp_series],
     }
 
     return displayed_data;
