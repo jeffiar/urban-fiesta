@@ -2,6 +2,7 @@
 // // // javascript library for creating charts
 // #############################
 var Chartist = require("chartist");
+var Data = require("../data.json");
 
 // ##############################
 // // // variables used to create animation on charts
@@ -17,8 +18,8 @@ var delays2 = 80,
 
 const dailySalesChart = {
   data: {
-    labels: ["M", "T", "W", "T", "F", "S", "S"],
-    series: [[12, 17, 7, 17, 23, 18, 38]]
+    labels: Data["sales"]["labels"],
+    series: Data["sales"]["series"],
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
@@ -71,21 +72,8 @@ const dailySalesChart = {
 
 const emailsSubscriptionChart = {
   data: {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ],
-    series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
+    labels: Data["emails"]["labels"],
+    series: Data["emails"]["series"],
   },
   options: {
     axisX: {
