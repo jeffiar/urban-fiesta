@@ -61,7 +61,6 @@ class Transcript extends React.Component {
     this.setState(prevState => ({
       time: prevState.time + 1
     }));
-    console.log('tick');
   }
 
   componentDidMount() {
@@ -85,14 +84,12 @@ class Transcript extends React.Component {
   resetData(time) {
     const raw_text = this.state.text;
     const displayed_text = get_text_window(raw_text, time, 5, 5);
-    console.log(displayed_text);
     return displayed_text.join(' ');
   }
 
   render() {
-    const { classes, time } = this.props;
-    const displayed_text = this.resetData(time);
-    console.log(displayed_text);
+    const { classes } = this.props;
+    const displayed_text = this.resetData(this.state.time);
     return (
       <div>
         <GridContainer>
