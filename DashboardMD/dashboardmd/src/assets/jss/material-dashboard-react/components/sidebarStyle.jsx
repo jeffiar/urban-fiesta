@@ -71,6 +71,8 @@ const sidebarStyle = theme => ({
     fontWeight: "400",
     lineHeight: "30px",
     textDecoration: "none",
+    marginTop: "9px",
+    marginLeft: "10px",
     backgroundColor: "transparent",
     "&,&:hover": {
       color: "#FFFFFF"
