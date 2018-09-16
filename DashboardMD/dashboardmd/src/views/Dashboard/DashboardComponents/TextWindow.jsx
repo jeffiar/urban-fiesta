@@ -11,8 +11,16 @@ const get_text_window = (data, cur_time, max_time, window_length) => {
   if (splits >= d.length){
     splits = d.length - 1
   }
-  d[splits] += '.';
-  return d[splits];
+  var left = splits - 2;
+  if (left < 0){
+    left = 0;
+  }
+  var right = splits + 1;
+  for (var i = 0; i < right; i++){
+    d[i] += '.';
+  }
+
+  return d.slice(left, right);
 }
 
 export default get_text_window;
