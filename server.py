@@ -5,6 +5,8 @@ import json
 from surgery import Surgery, SurgeryException
 
 app = Flask(__name__)
+def create_app():
+    return app
 
 @app.route('/')
 def index():
