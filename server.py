@@ -51,7 +51,8 @@ def get_surgery(id):
     Returns: the text of the surgery
     """
     try:
-        return open('data/surgeries/%d' % id).read()
+        text = open('data/surgeries/%d' % id).read()
+        return json.dumps({'text' : text})
     except IOError:
         return 'Surgery %d does not exist!' % id #TODO error code
 

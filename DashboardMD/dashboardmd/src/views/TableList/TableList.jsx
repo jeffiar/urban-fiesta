@@ -61,10 +61,12 @@ class TableList extends React.Component{
         let results = [];
         for (var r = 0; r < result.length; r++) {
           var temp = [];
-          temp.push(result[r]['id']);
+          var eyedee = result[r]['id'];
+          // temp.push('<Link to="/dashboard/' + eyedee + '">' + eyedee + '</Link>');
+          temp.push(eyedee);
           temp.push(result[r]['name']);
           temp.push(result[r]['type']);
-          results.push(temp.slice())
+          results.push(temp)
         }
         this.setState({tableData: results});
         // let length = reponse.data.length;
@@ -141,6 +143,14 @@ class TableList extends React.Component{
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card plain>
+            <CardHeader plain color="primary">
+              <h4 className={classes.cardTitleWhite}>
+                Here is a list of all the surgeries performed.
+              </h4>
+              <p className={classes.cardCategoryWhite}>
+                Click on a surgery to see further details.
+              </p>
+            </CardHeader>
             <CardBody>
               <table>
                 {this.createTable(this.state.tableData)}
