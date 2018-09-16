@@ -9,13 +9,10 @@ const get_text_window = (data, cur_time, max_time, window_length) => {
   var l = d.length;
   var splits = Math.ceil(l * cur_time / max_time);
   if (splits >= d.length){
-    splits = d.length - 1;
+    splits = d.length - 1
   }
-  var right = splits + 1;
-  for (var i = 0; i < right; i++){
-    d[i] += '.';
-  }
-  return d.slice(0, right);
+  d[splits] += '.';
+  return d[splits];
 }
 
 export default get_text_window;

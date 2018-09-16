@@ -84,7 +84,7 @@ class Transcript extends React.Component {
   resetData(time) {
     const raw_text = this.state.text;
     const displayed_text = get_text_window(raw_text, time, 5, 5);
-    return displayed_text.join(' ');
+    return displayed_text
   }
 
   render() {
