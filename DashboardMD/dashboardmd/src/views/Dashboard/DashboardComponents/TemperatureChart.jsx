@@ -60,10 +60,10 @@ class TemperatureChart extends React.Component {
 
   resetData(time) {
     const raw_labels = emailsSubscriptionChart.data.labels;
-    const displayed_labels = get_window(raw_labels, time, 5, 5);
+    const displayed_labels = get_window(raw_labels, time, 600, 5);
 
     const raw_series = emailsSubscriptionChart.data.series;
-    const displayed_series = get_window(raw_series, time, 5, 5);
+    const displayed_series = get_window(raw_series, time, 600, 5);
 
     const displayed_data = {
       labels: displayed_labels,
@@ -86,7 +86,7 @@ class TemperatureChart extends React.Component {
             <ChartistGraph
               className="ct-chart"
               data={displayed_data}
-              type="Bar"
+              type="Line"
               options={emailsSubscriptionChart.options}
               responsiveOptions={emailsSubscriptionChart.responsiveOptions}
               listener={emailsSubscriptionChart.animation}
