@@ -8,7 +8,6 @@ import Table from "../../components/Table/Table.jsx";
 import Card from "../../components/Card/Card.jsx";
 import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
-import axios from 'axios';
 
 const styles = {
   cardCategoryWhite: {
