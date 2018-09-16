@@ -46,7 +46,7 @@ class Transcript extends React.Component {
   state = {
     value: 0,
     time: 0,
-    text: "Hello my, name is Victor. I'm about to eat apples, carrots, nenes. copa is life. donuts are awesome.swag."
+    text: ""
   };
 
   handleChange = (event, value) => {
@@ -66,15 +66,16 @@ class Transcript extends React.Component {
   componentDidMount() {
     // Please forgive me oh gods of coding....
     var tmp = window.location.href.split('/');
-    var eyedee = tmp[tmp.length - 1]
+    var eyedee = tmp[tmp.length - 1];
     fetch('http://40.117.141.155:5000/surgeries/' + eyedee).then(res => res.json()).then(
         (result) => {
             this.setState({text: result['text']});
+            console.log(result['text']);
     },
         (error) => {
             console.log(error);
     });
-    this.interval = setInterval(() => this.tick(), 1000);
+    this.interval = setInterval(() => this.tick(), 10000);
   }
 
   componentWillUnmount() {

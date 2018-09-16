@@ -4,7 +4,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridItem from "../../components/Grid/GridItem.jsx";
 import GridContainer from "../../components/Grid/GridContainer.jsx";
-import Table from "../../components/Table/Table.jsx";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
 import Card from "../../components/Card/Card.jsx";
 import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
@@ -97,25 +101,23 @@ class TableList extends React.Component{
   createTable = (array) => {
     let table = [];
 
+    table.push(
+            <TableHead>
+            <TableCell>ID</TableCell>
+            <TableCell>Patient Name</TableCell>
+            <TableCell>Surgery Type</TableCell>
+            </TableHead>
+    )
     for (var i = 0; i < array.length; i++) {
-      if (i == 0) {
-        table.push(
-          <tr class=".ct">
-            <th>"Id"</th>
-            <th>"Name"</th>
-            <th>"Type"</th>
-          </tr>
-        )
-      }
       table.push(
-        <tr>
-          <td><Link to={"/dashboard/" + array[i][0]}>{array[i][0]}</Link></td>
-          <td>{array[i][1]}</td>
-          <td>{array[i][2]}</td>
-        </tr>
+            <TableRow>
+            <TableCell><Link to={"/dashboard/" + array[i][0]}>{array[i][0]}</Link></TableCell>
+            <TableCell>{array[i][1]}</TableCell>
+            <TableCell>{array[i][2]}</TableCell>
+            </TableRow>
       )
     }
-    return table
+    return table;
 
   }
 
@@ -125,7 +127,7 @@ class TableList extends React.Component{
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card plain>
-            <CardHeader plain color="primary">
+            <CardHeader plain color="info">
               <h4 className={classes.cardTitleWhite}>
                 Here is a list of all the surgeries performed.
               </h4>
@@ -134,11 +136,9 @@ class TableList extends React.Component{
               </p>
             </CardHeader>
             <CardBody>
-              <div class="customTable">
-                <table>
+              <Table>
                   {this.createTable(this.state.tableData)}
-                </table>
-              </div>
+              </Table>
             </CardBody>
           </Card>
         </GridItem>
