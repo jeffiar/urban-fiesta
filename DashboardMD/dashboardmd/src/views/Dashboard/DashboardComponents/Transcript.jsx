@@ -65,6 +65,16 @@ class Transcript extends React.Component {
   }
 
   componentDidMount() {
+    // Please forgive me oh gods of coding....
+    var tmp = window.location.href.split('/');
+    var eyedee = tmp[tmp.length - 1]
+    fetch('http://40.117.141.155:5000/surgeries/' + eyedee).then(res => res.json()).then(
+        (result) => {
+            this.setState({text: result['text']});
+    },
+        (error) => {
+            console.log(error);
+    });
     this.interval = setInterval(() => this.tick(), 1000);
   }
 
