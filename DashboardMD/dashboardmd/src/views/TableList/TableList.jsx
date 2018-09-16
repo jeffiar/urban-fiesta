@@ -98,24 +98,19 @@ class TableList extends React.Component{
     for (var i = 0; i < array.length; i++) {
       if (i == 0) {
         table.push(
-          <th>
-            <td>"Id"</td>
-            <td>"Name"</td>
-            <td>"Type"</td>
-          </th>
+          <tr>
+            <th>"Id"</th>
+            <th>"Name"</th>
+            <th>"Type"</th>
+          </tr>
         )
       }
       table.push(
-        <Router>
-          <div>
-            <tr>
-              <td><Link to={"/dashboard/" + array[i][0]}>{array[i][0]}</Link></td>
-              <td>{array[i][1]}</td>
-              <td>{array[i][2]}</td>
-            </tr>
-            <Route exact path="/dashboard/:id" component = {Dashboard}/>
-          </div>
-        </Router>
+        <tr>
+          <td><Link to={"/dashboard/" + array[i][0]}>{array[i][0]}</Link></td>
+          <td>{array[i][1]}</td>
+          <td>{array[i][2]}</td>
+        </tr>
       )
     }
     return table
