@@ -61,6 +61,7 @@ class Transcript extends React.Component {
     this.setState(prevState => ({
       time: prevState.time + 1
     }));
+    console.log('tick');
   }
 
   componentDidMount() {

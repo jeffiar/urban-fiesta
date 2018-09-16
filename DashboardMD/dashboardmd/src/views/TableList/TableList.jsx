@@ -98,7 +98,7 @@ class TableList extends React.Component{
     for (var i = 0; i < array.length; i++) {
       if (i == 0) {
         table.push(
-          <tr>
+          <tr class=".ct">
             <th>"Id"</th>
             <th>"Name"</th>
             <th>"Type"</th>
@@ -117,24 +117,6 @@ class TableList extends React.Component{
 
   }
 
-  renderTableRows(array) {
-    let result = [];
-    for (var i = 0; i < array.length; i++) {
-      result.push(
-        <Router>
-          <tr>
-            <td><Link to={"/" + array[i][0]}>{array[i][0]}</Link></td>
-            <td>{array[i][1]}</td>
-            <td>{array[i][2]}</td>
-          </tr>
-          <Route path="/:id" />
-        </Router>
-      )
-    }
-    return result;
-  }
-
-
   render() {
     const { classes } = this.props;
     return (
@@ -142,9 +124,11 @@ class TableList extends React.Component{
         <GridItem xs={12} sm={12} md={12}>
           <Card plain>
             <CardBody>
-              <table>
-                {this.createTable(this.state.tableData)}
-              </table>
+              <div class="customTable">
+                <table>
+                  {this.createTable(this.state.tableData)}
+                </table>
+              </div>
             </CardBody>
           </Card>
         </GridItem>
