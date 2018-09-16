@@ -1,4 +1,4 @@
-from flask import Flask, flash
+from flask import Flask, flash, request
 import csv
 import json
 
@@ -63,8 +63,11 @@ def storify(surgery):
     # Append this entry to the list of surgeries
     line = '%d,%s,%s' % (new_id, surgery.name, surgery.type)
     with open('data/surgery_list', 'a') as f:
-        f.write(line)
+        f.write(line.strip())
+        f.write('\n')
 
     # Write the (text) contents of this surgery to the right file
     with open('data/surgeries/%d' % new_id, 'w') as f:
         f.write(surgery.text)
+
+    return new_id
