@@ -46,7 +46,7 @@ class Transcript extends React.Component {
   state = {
     value: 0,
     time: 0,
-    text: "Hello my, name is Victor. I'm about to eat apples, carrots, nenes."
+    text: "Hello my, name is Victor. I'm about to eat apples, carrots, nenes. copa is life. donuts are awesome.swag."
   };
 
   handleChange = (event, value) => {
