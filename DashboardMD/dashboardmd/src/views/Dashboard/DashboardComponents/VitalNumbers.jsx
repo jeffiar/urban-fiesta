@@ -61,7 +61,7 @@ class VitalNumbers extends React.Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 4000);
+    this.interval = setInterval(() => this.tick(), 1000);
 
   }
 
