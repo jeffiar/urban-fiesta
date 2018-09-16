@@ -12,14 +12,16 @@ var delays = 80,
 var delays2 = 80,
   durations2 = 500;
 
+
 // ##############################
 // // // Daily Sales
 // #############################
 
 const dailySalesChart = {
+
   data: {
-    labels: Data["sales"]["labels"],
-    series: Data["sales"]["series"],
+    labels: Data["pulseChart"]["labels"],
+    series: Data["pulseChart"]["series"],
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
@@ -35,35 +37,35 @@ const dailySalesChart = {
     }
   },
   // for animation
-  animation: {
-    draw: function(data) {
-      if (data.type === "line" || data.type === "area") {
-        data.element.animate({
-          d: {
-            begin: 600,
-            dur: 700,
-            from: data.path
-              .clone()
-              .scale(1, 0)
-              .translate(0, data.chartRect.height())
-              .stringify(),
-            to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
-        });
-      } else if (data.type === "point") {
-        data.element.animate({
-          opacity: {
-            begin: (data.index + 1) * delays,
-            dur: durations,
-            from: 0,
-            to: 1,
-            easing: "ease"
-          }
-        });
-      }
-    }
-  }
+  // animation: {
+  //   draw: function(data) {
+  //     if (data.type === "line" || data.type === "area") {
+  //       data.element.animate({
+  //         d: {
+  //           begin: 600,
+  //           dur: 700,
+  //           from: data.path
+  //             .clone()
+  //             .scale(1, 0)
+  //             .translate(0, data.chartRect.height())
+  //             .stringify(),
+  //           to: data.path.clone().stringify(),
+  //           easing: Chartist.Svg.Easing.easeOutQuint
+  //         }
+  //       });
+  //     } else if (data.type === "point") {
+  //       data.element.animate({
+  //         opacity: {
+  //           begin: (data.index + 1) * delays,
+  //           dur: durations,
+  //           from: 0,
+  //           to: 1,
+  //           easing: "ease"
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 };
 
 // ##############################
@@ -72,8 +74,8 @@ const dailySalesChart = {
 
 const emailsSubscriptionChart = {
   data: {
-    labels: Data["emails"]["labels"],
-    series: Data["emails"]["series"],
+    labels: Data["tempChart"]["labels"],
+    series: Data["tempChart"]["series"],
   },
   options: {
     axisX: {
@@ -140,35 +142,35 @@ const completedTasksChart = {
       left: 0
     }
   },
-  animation: {
-    draw: function(data) {
-      if (data.type === "line" || data.type === "area") {
-        data.element.animate({
-          d: {
-            begin: 600,
-            dur: 700,
-            from: data.path
-              .clone()
-              .scale(1, 0)
-              .translate(0, data.chartRect.height())
-              .stringify(),
-            to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
-        });
-      } else if (data.type === "point") {
-        data.element.animate({
-          opacity: {
-            begin: (data.index + 1) * delays,
-            dur: durations,
-            from: 0,
-            to: 1,
-            easing: "ease"
-          }
-        });
-      }
-    }
-  }
+  // animation: {
+  //   draw: function(data) {
+  //     if (data.type === "line" || data.type === "area") {
+  //       data.element.animate({
+  //         d: {
+  //           begin: 600,
+  //           dur: 700,
+  //           from: data.path
+  //             .clone()
+  //             .scale(1, 0)
+  //             .translate(0, data.chartRect.height())
+  //             .stringify(),
+  //           to: data.path.clone().stringify(),
+  //           easing: Chartist.Svg.Easing.easeOutQuint
+  //         }
+  //       });
+  //     } else if (data.type === "point") {
+  //       data.element.animate({
+  //         opacity: {
+  //           begin: (data.index + 1) * delays,
+  //           dur: durations,
+  //           from: 0,
+  //           to: 1,
+  //           easing: "ease"
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 };
 
 module.exports = {

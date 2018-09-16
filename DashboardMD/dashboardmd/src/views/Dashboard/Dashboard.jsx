@@ -40,6 +40,8 @@ import {
 
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
+import _getTime from "../../Clock.jsx"
+
 import VitalNumbers from "./DashboardComponents/VitalNumbers"
 import VitalGraphs from "./DashboardComponents/VitalGraphs"
 import Transcript from "./DashboardComponents/Transcript"
@@ -48,6 +50,7 @@ class Dashboard extends React.Component {
   state = {
     value: 0
   };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -55,6 +58,7 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
   render() {
     const { classes } = this.props;
     return (

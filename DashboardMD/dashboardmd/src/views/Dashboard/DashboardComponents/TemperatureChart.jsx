@@ -40,77 +40,66 @@ import {
 
 import dashboardStyle from "../../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
-import PulseChart from "./PulseChart";
-import TemperatureChart from "./TemperatureChart";
+import get_window from "./DataWindow";
 
-class VitalGraphs extends React.Component {
-  state = {
-    value: 0,
-    time: 0
-  };
+var Chartist = require("chartist");
+var Data = require("../../../data.json");
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+// ##############################
+// // // variables used to create animation on charts
+// #############################
+var delays = 80,
+  durations = 500;
+var delays2 = 80,
+  durations2 = 500;
 
-  handleChangeIndex = index => {
-    this.setState({ value: index });
-  };
-
-  tick() {
-    this.setState(prevState => ({
-      time: (prevState.time + 1) % 10
-    }));
+class TemperatureChart extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 3000);
-  }
+  resetData(time) {
+    const raw_labels = emailsSubscriptionChart.data.labels;
+    const displayed_labels = get_window(raw_labels, time, 5, 5);
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
+    const raw_series = emailsSubscriptionChart.data.series;
+    const displayed_series = get_window(raw_series, time, 5, 5);
+
+    const displayed_data = {
+      labels: displayed_labels,
+      series: [displayed_series],
+    }
+
+    return displayed_data;
   }
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, time } = this.props;
+    const displayed_data = this.resetData(time);
     return (
-      <div>
-        <GridContainer>
-          <div style={{flex: "1 0 auto", marginLeft: "-850px", width: '1200px', flexDirection: 'column'}}>
-            {/* Pulse Monitor */}
-            <PulseChart time={this.state.time}/>
-
-            {/* Body Temperature Monitor */}
-            <TemperatureChart time={this.state.time}/>
-
-            {
-            // <GridItem xs={12} sm={12} md={4}>
-            //   <Card chart>
-            //     <CardBody>
-            //       <h3 className={classes.cardTitle}>Completed Tasks</h3>
-            //     </CardBody>
-            //     <CardHeader color="info">
-            //       <ChartistGraph
-            //         className="ct-chart"
-            //         data={completedTasksChart.data}
-            //         type="Line"
-            //         options={completedTasksChart.options}
-            //         listener={completedTasksChart.animation}
-            //       />
-            //     </CardHeader>
-            //   </Card>
-            // </GridItem>
-            }
-          </div>
-        </GridContainer>
-      </div>
+      <GridItem xs={12} sm={12} md={4}>
+        <Card chart>
+          <CardBody>
+            <h3 className={classes.cardTitle}>Body Temperature</h3>
+          </CardBody>
+          <CardHeader color="info">
+            <ChartistGraph
+              className="ct-chart"
+              data={displayed_data}
+              type="Bar"
+              options={emailsSubscriptionChart.options}
+              responsiveOptions={emailsSubscriptionChart.responsiveOptions}
+              listener={emailsSubscriptionChart.animation}
+            />
+          </CardHeader>
+        </Card>
+      </GridItem>
     );
   }
 }
 
-VitalGraphs.propTypes = {
+TemperatureChart.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(dashboardStyle)(VitalGraphs);
+export default withStyles(dashboardStyle)(TemperatureChart);
