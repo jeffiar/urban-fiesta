@@ -52,6 +52,8 @@ def get_surgery(id):
     """
     try:
         text = open('data/surgeries/%d' % id).read()
+        if text.startswith('Speaker'):
+            text = text[19:]
         return json.dumps({'text' : text})
     except IOError:
         return 'Surgery %d does not exist!' % id #TODO error code
