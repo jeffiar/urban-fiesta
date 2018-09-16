@@ -46,7 +46,7 @@ class Transcript extends React.Component {
   state = {
     value: 0,
     time: 0,
-    text: 'We will now use the scalpel to gain access to the lower vena cava.'
+    text: "Hello my, name is Victor. I'm about to eat apples, carrots, nenes."
   };
 
   handleChange = (event, value) => {
@@ -73,14 +73,15 @@ class Transcript extends React.Component {
 
   resetData(time) {
     const raw_text = this.state.text;
-    console.log('reset');
     const displayed_text = get_text_window(raw_text, time, 5, 5);
+    console.log(displayed_text);
     return displayed_text.join(' ');
   }
 
   render() {
     const { classes, time } = this.props;
     const displayed_text = this.resetData(time);
+    console.log(displayed_text);
     return (
       <div>
         <GridContainer>

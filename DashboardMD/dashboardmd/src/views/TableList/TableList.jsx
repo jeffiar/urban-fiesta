@@ -8,6 +8,13 @@ import Table from "../../components/Table/Table.jsx";
 import Card from "../../components/Card/Card.jsx";
 import CardHeader from "../../components/Card/CardHeader.jsx";
 import CardBody from "../../components/Card/CardBody.jsx";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+
+import Dashboard from "../../views/Dashboard/Dashboard";
 
 const styles = {
   cardCategoryWhite: {
@@ -44,7 +51,7 @@ class TableList extends React.Component{
     super(props)
 
     this.state = {
-      tableData: [],
+      tableData: [["a", "b", "c"]],
     }
   }
 
@@ -85,44 +92,64 @@ class TableList extends React.Component{
 
   }
 
+  createTable = (array) => {
+    let table = [];
+
+    for (var i = 0; i < array.length; i++) {
+      if (i == 0) {
+        table.push(
+          <th>
+            <td>"Id"</td>
+            <td>"Name"</td>
+            <td>"Type"</td>
+          </th>
+        )
+      }
+      table.push(
+        <Router>
+          <div>
+            <tr>
+              <td><Link to={"/dashboard/" + array[i][0]}>{array[i][0]}</Link></td>
+              <td>{array[i][1]}</td>
+              <td>{array[i][2]}</td>
+            </tr>
+            <Route exact path="/dashboard/:id" component = {Dashboard}/>
+          </div>
+        </Router>
+      )
+    }
+    return table
+
+  }
+
+  renderTableRows(array) {
+    let result = [];
+    for (var i = 0; i < array.length; i++) {
+      result.push(
+        <Router>
+          <tr>
+            <td><Link to={"/" + array[i][0]}>{array[i][0]}</Link></td>
+            <td>{array[i][1]}</td>
+            <td>{array[i][2]}</td>
+          </tr>
+          <Route path="/:id" />
+        </Router>
+      )
+    }
+    return result;
+  }
+
 
   render() {
     const { classes } = this.props;
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-              <p className={classes.cardCategoryWhite}>
-                Here is a subtitle for this table
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["Name", "Country", "City", "Salary"]}
-                tableData={this.state.tableData}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={12}>
           <Card plain>
-            <CardHeader plain color="primary">
-              <h4 className={classes.cardTitleWhite}>
-                Table on Plain Background
-              </h4>
-              <p className={classes.cardCategoryWhite}>
-                Here is a subtitle for this table
-              </p>
-            </CardHeader>
             <CardBody>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={["Id", "Name", "Type"]}
-                tableData={this.state.tableData}
-              />
+              <table>
+                {this.createTable(this.state.tableData)}
+              </table>
             </CardBody>
           </Card>
         </GridItem>
